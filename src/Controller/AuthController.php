@@ -1,36 +1,52 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Controller;
 
+use App\DTO\LoginRequestDTO;
 use App\Service\AuthService;
+use App\Service\JwtService;
+use App\Validation\LoginValidator;
+use App\Exception\InvalidCredentialsException;
+use App\Exception\UserNotFoundException;
+use App\Exception\ValidationException;
+use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthController
 {
-    public function __construct(private AuthService $authService) {}
+    public function __construct(
+        private AuthService $authService,
+        private JwtService $jwtService,
+        private LoginValidator $loginValidator,
+        private LoggerInterface $logger,
+    ) {}
 
     public function login(Request $request, Response $response): Response
     {
-        $data = (array) $request->getParsedBody();
+        $dto = LoginRequestDTO::fromArray((array) $request->getParsedBody());
 
-        $email = $data['email'] ?? '';
-        $password = $data['password'] ?? '';
+        try {
+            $this->loginValidator->validate($dto);
+        } catch (ValidationException $e) {
+            $response->getBody()->write(json_encode(['errors' => $e->getErrors()]));
+            return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
+        }
 
-        $user = $this->authService->attempt($email, $password);
+        try {
+            $user = $this->authService->attempt($dto->email, $dto->password);
+        } catch (UserNotFoundException|InvalidCredentialsException $e) {
+            $this->logger->warning('Intento de login fallido', ['email' => $dto->email, 'reason' => $e->getMessage()]);
 
-        if (!$user) {
             $response->getBody()->write(json_encode(['error' => 'Credenciales inválidas']));
             return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
         }
 
-        // Aquí es donde el controller SÍ sabe de HTTP: crea la sesión
-        session_regenerate_id(true);
-        $_SESSION['user_id'] = $user->id;
+        $this->logger->info('Login exitoso', ['user_id' => $user->id, 'email' => $dto->email]);
 
-        $response->getBody()->write(json_encode(['message' => 'Login exitoso', 'user' => $user->name]));
+        $token = $this->jwtService->generate($user->id);
+
+        $response->getBody()->write(json_encode(['message' => 'Login exitoso', 'token' => $token]));
         return $response->withHeader('Content-Type', 'application/json');
     }
 }

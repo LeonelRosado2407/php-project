@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Repository\Contract\UserRepositoryInterface;
 use App\Model\User;
 use PDO;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
     public function __construct(private PDO $pdo) {}
 

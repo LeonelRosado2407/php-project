@@ -22,7 +22,6 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 // 4. Middlewares
-$app->add(\App\Middleware\SessionMiddleware::class);
 (require __DIR__ . '/../src/Config/middleware.php')($app);
 
 // 5. Rutas

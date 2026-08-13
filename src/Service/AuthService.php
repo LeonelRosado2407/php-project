@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Repository\UserRepository;
+use App\Repository\Contract\UserRepositoryInterface;
 use App\Model\User;
+use App\Exception\InvalidCredentialsException;
+use App\Exception\UserNotFoundException;
 
 class AuthService
 {
-    public function __construct(private UserRepository $userRepository) {}
+    public function __construct(private UserRepositoryInterface $userRepository) {}
 
-    public function attempt(string $email, string $password): ?User
+    public function attempt(string $email, string $password): User
     {
         $user = $this->userRepository->findByEmail($email);
 
         if (!$user) {
-            return null;
+            throw new UserNotFoundException();
         }
 
         if (!password_verify($password, $user->passwordHash)) {
-            return null;
+            throw new InvalidCredentialsException();
         }
 
         return $user;
