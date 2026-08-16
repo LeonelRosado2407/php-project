@@ -12,6 +12,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 return function (App $app) {
     // Rutas públicas
     $app->post('/login', [AuthController::class, 'login']);
+    $app->post('/register', [AuthController::class, 'register']);
 
     // Rutas protegidas con JWT, agrupadas
     $app->group('', function ($group) {

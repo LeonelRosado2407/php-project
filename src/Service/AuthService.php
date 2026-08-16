@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Exception\EmailAlreadyExistsException;
 use App\Repository\Contract\UserRepositoryInterface;
 use App\Model\User;
 use App\Exception\InvalidCredentialsException;
@@ -26,5 +27,16 @@ class AuthService
         }
 
         return $user;
+    }
+
+    public function register(string $name, string $email, string $password): User
+    {
+        if ($this->userRepository->existsByEmail($email)) {
+            throw new EmailAlreadyExistsException();
+        }
+
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+        return $this->userRepository->create($email, $passwordHash, $name);
     }
 }

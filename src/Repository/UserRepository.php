@@ -29,4 +29,29 @@ class UserRepository implements UserRepositoryInterface
             name: $row['name'],
         );
     }
+
+    public function existsByEmail(string $email): bool
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+
+        return (bool) $stmt->fetchColumn();
+    }
+
+    public function create(string $email, string $passwordHash, string $name): User
+    {
+        $stmt = $this->pdo->prepare(
+            'INSERT INTO users (email, password, name) VALUES (?, ?, ?)'
+        );
+        $stmt->execute([$email, $passwordHash, $name]);
+
+        $id = (int) $this->pdo->lastInsertId();
+
+        return new User(
+            id: $id,
+            email: $email,
+            passwordHash: $passwordHash,
+            name: $name,
+        );
+    }
 }

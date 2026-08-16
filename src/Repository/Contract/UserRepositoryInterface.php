@@ -9,4 +9,6 @@ use App\Model\User;
 interface UserRepositoryInterface
 {
     public function findByEmail(string $email): ?User;
+    public function existsByEmail(string $email): bool;
+    public function create(string $email, string $passwordHash, string $name): User;
 }
