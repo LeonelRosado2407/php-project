@@ -26,6 +26,12 @@
         "monolog/monolog": "^3.10"
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^11.5",
+        "fakerphp/faker": "^1.24"
+    },
+    "scripts": {
+        "serve": "php -S localhost:8000 -t public",
+        "migrate": "php bin/migrate.php",
+        "seed": "php bin/seed.php"
     }
 }
