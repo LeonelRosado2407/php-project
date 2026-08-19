@@ -18,6 +18,7 @@
         }
     ],
     "require": {
+        "php": "^8.2",
         "slim/slim": "4.*",
         "slim/psr7": "^1.8",
         "php-di/php-di": "7.0",
@@ -32,6 +33,7 @@
     "scripts": {
         "serve": "php -S localhost:8000 -t public",
         "migrate": "php bin/migrate.php",
-        "seed": "php bin/seed.php"
+        "seed": "php bin/seed.php",
+        "make:migration": "php bin/make-migration.php"
     }
 }

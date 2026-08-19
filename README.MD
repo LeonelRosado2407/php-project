@@ -6,6 +6,19 @@
 
 Proyecto para reforzar conocimientos de PHP y cómo se estructura un proyecto serio; para ello esto es una API REST construida con Slim4, sin ningún framework "todo en uno" — el contenedor de dependencias, el sistema de migraciones y el de seeders están hechos a mano para entender qué hace Laravel (y frameworks similares) por debajo.
 
+## Requisitos del sistema
+
+- PHP >= 8.2
+- MySQL >= 8.0 (o MariaDB >= 10.6)
+- Composer >= 2.x
+
+## Instalación
+
+composer install
+cp .env.example .env
+composer migrate up
+composer seed
+
 ## Estructura del proyecto
 
 ```
