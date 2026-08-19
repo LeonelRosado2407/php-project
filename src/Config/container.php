@@ -19,11 +19,11 @@ return [
     PDO::class => function (ContainerInterface $c) {
         $settings = $c->get(Settings::class);
 
-        $host = $settings->get('db.host');
-        $port = $settings->get('db.port');
-        $database = $settings->get('db.database');
-        $username = $settings->get('db.username');
-        $password = $settings->get('db.password');
+        $host = $settings->require('db.host');
+        $port = $settings->get('db.port', 3306);
+        $database = $settings->require('db.database');
+        $username = $settings->require('db.username');
+        $password = $settings->get('db.password', '');
 
         $dsn = "mysql:host={$host};port={$port};dbname={$database};charset=utf8mb4";
 
@@ -44,7 +44,7 @@ return [
         $settings = $c->get(Settings::class);
 
         return new JwtService(
-            secret: $settings->get('jwt.secret'),
+            secret: $settings->require('jwt.secret'),
             expiration: (int) $settings->get('jwt.expiration')
         );
     },

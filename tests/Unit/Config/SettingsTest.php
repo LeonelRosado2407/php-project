@@ -6,6 +6,7 @@ namespace Tests\Unit\Config;
 
 use PHPUnit\Framework\TestCase;
 use Keel\Config\Settings;
+use Keel\Exception\MissingConfigurationException;
 
 class SettingsTest extends TestCase
 {
@@ -49,5 +50,30 @@ class SettingsTest extends TestCase
         $settings = new Settings(['db' => ['host' => 'localhost', 'port' => 3306]]);
 
         $this->assertSame(['host' => 'localhost', 'port' => 3306], $settings->get('db'));
+    }
+
+    public function test_require_devuelve_el_valor_si_existe(): void
+    {
+        $settings = new Settings(['jwt' => ['secret' => 'shh']]);
+
+        $this->assertSame('shh', $settings->require('jwt.secret'));
+    }
+
+    public function test_require_lanza_excepcion_si_la_clave_no_existe(): void
+    {
+        $settings = new Settings([]);
+
+        $this->expectException(MissingConfigurationException::class);
+
+        $settings->require('jwt.secret');
+    }
+
+    public function test_require_lanza_excepcion_si_el_valor_es_null(): void
+    {
+        $settings = new Settings(['jwt' => ['secret' => null]]);
+
+        $this->expectException(MissingConfigurationException::class);
+
+        $settings->require('jwt.secret');
     }
 }

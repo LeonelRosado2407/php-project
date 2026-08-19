@@ -26,8 +26,8 @@ class LoginValidatorTest extends TestCase
         $validator = new LoginValidator();
         $dto = new LoginRequestDTO(email: 'test@test.com', password: 'secret123');
 
-        $validator->validate($dto); // no debería lanzar nada
+        $this->expectNotToPerformAssertions();
 
-        $this->assertTrue(true); // si llegamos aquí, no hubo excepción
+        $validator->validate($dto); // no debería lanzar nada
     }
 }

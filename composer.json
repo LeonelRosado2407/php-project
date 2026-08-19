@@ -42,12 +42,15 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5",
-        "fakerphp/faker": "^1.24"
+        "fakerphp/faker": "^1.24",
+        "phpstan/phpstan": "^2.2"
     },
     "scripts": {
         "serve": "php -S localhost:8000 -t public",
         "migrate": "php bin/migrate.php",
         "seed": "php bin/seed.php",
-        "make:migration": "php bin/make-migration.php"
+        "make:migration": "php bin/make-migration.php",
+        "test": "phpunit",
+        "stan": "phpstan analyse"
     }
 }
