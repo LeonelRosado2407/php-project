@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Contract;
+namespace Keel\Repository\Contract;
 
-use App\Model\User;
+use Keel\Model\User;
 
 interface UserRepositoryInterface
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Fake;
 
-use App\Repository\Contract\UserRepositoryInterface;
-use App\Model\User;
+use Keel\Repository\Contract\UserRepositoryInterface;
+use Keel\Model\User;
 
 class FakeUserRepository implements UserRepositoryInterface
 {

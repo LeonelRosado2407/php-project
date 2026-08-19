@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace Keel\Model;
 
 /**
  * Class User
- * @package App\Model
+ * @package Keel\Model
  */
 class User
 {

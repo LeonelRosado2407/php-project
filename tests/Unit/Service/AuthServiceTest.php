@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Service;
 
 use PHPUnit\Framework\TestCase;
-use App\Service\AuthService;
-use App\Model\User;
-use App\Exception\UserNotFoundException;
-use App\Exception\InvalidCredentialsException;
+use Keel\Service\AuthService;
+use Keel\Model\User;
+use Keel\Exception\UserNotFoundException;
+use Keel\Exception\InvalidCredentialsException;
 use Tests\Fake\FakeUserRepository;
 
 class AuthServiceTest extends TestCase

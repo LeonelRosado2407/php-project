@@ -1,10 +1,24 @@
 {
-    "name": "leonel/php-redis",
-    "description": "project to learn redis",
+    "name": "leonel/keel",
+    "description": "Framework PHP construido desde cero sobre Slim4, sin abstracciones de terceros para DI, migraciones o seeders — un ejercicio de transparencia arquitectónica.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "slim",
+        "framework",
+        "from-scratch",
+        "learning",
+        "psr-11",
+        "psr-15"
+    ],
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
-        }
+            "Keel\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

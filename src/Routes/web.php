@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
-use App\Controller\AuthController;
+use Keel\Controller\AuthController;
 use Slim\App;
-use App\Middleware\AuthMiddleware;
+use Keel\Middleware\AuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 

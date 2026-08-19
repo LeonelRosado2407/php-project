@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace Keel\Service;
 
-use App\Exception\EmailAlreadyExistsException;
-use App\Repository\Contract\UserRepositoryInterface;
-use App\Model\User;
-use App\Exception\InvalidCredentialsException;
-use App\Exception\UserNotFoundException;
+use Keel\Exception\EmailAlreadyExistsException;
+use Keel\Repository\Contract\UserRepositoryInterface;
+use Keel\Model\User;
+use Keel\Exception\InvalidCredentialsException;
+use Keel\Exception\UserNotFoundException;
 
 class AuthService
 {

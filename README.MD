@@ -171,8 +171,8 @@ Cada archivo regresa una clase anónima con los métodos `up()` (aplicar el camb
 
 declare(strict_types=1);
 
-use App\Database\Schema\Blueprint;
-use App\Database\Schema\SchemaBuilder;
+use Keel\Database\Schema\Blueprint;
+use Keel\Database\Schema\SchemaBuilder;
 
 return new class
 {
@@ -289,7 +289,7 @@ Todo seeder extiende de `App\Database\Seed\Seeder`, que ya inicializa `$this->fa
 
 declare(strict_types=1);
 
-namespace App\Database\Seed;
+namespace Keel\Database\Seed;
 
 use Faker\Factory;
 use Faker\Generator;
@@ -315,7 +315,7 @@ abstract class Seeder
 
 declare(strict_types=1);
 
-namespace App\Database\Seed;
+namespace Keel\Database\Seed;
 
 class UserSeeder extends Seeder
 {
@@ -371,7 +371,7 @@ Corre los seeders en el orden definido (importante si hay dependencias entre tab
 
 declare(strict_types=1);
 
-namespace App\Database\Seed;
+namespace Keel\Database\Seed;
 
 use PDO;
 

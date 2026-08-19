@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace Keel\Controller;
 
-use App\DTO\LoginRequestDTO;
-use App\DTO\RegisterRequestDTO;
-use App\Exception\EmailAlreadyExistsException;
-use App\Service\AuthService;
-use App\Service\JwtService;
-use App\Validation\LoginValidator;
-use App\Exception\InvalidCredentialsException;
-use App\Exception\UserNotFoundException;
-use App\Exception\ValidationException;
-use App\Validation\RegisterValidator;
+use Keel\DTO\LoginRequestDTO;
+use Keel\DTO\RegisterRequestDTO;
+use Keel\Exception\EmailAlreadyExistsException;
+use Keel\Service\AuthService;
+use Keel\Service\JwtService;
+use Keel\Validation\LoginValidator;
+use Keel\Exception\InvalidCredentialsException;
+use Keel\Exception\UserNotFoundException;
+use Keel\Exception\ValidationException;
+use Keel\Validation\RegisterValidator;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Validation;
+namespace Keel\Validation;
 
-use App\DTO\RegisterRequestDTO;
-use App\Exception\ValidationException;
+use Keel\DTO\RegisterRequestDTO;
+use Keel\Exception\ValidationException;
 
 class RegisterValidator
 {

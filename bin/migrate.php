@@ -4,8 +4,8 @@
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
-use App\Database\Schema\SchemaBuilder;
-use App\Database\Migrator;
+use Keel\Database\Schema\SchemaBuilder;
+use Keel\Database\Migrator;
 use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';

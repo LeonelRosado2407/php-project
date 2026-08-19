@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Validation;
 
 use PHPUnit\Framework\TestCase;
-use App\Validation\LoginValidator;
-use App\DTO\LoginRequestDTO;
-use App\Exception\ValidationException;
+use Keel\Validation\LoginValidator;
+use Keel\DTO\LoginRequestDTO;
+use Keel\Exception\ValidationException;
 
 class LoginValidatorTest extends TestCase
 {

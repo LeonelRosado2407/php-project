@@ -2,3 +2,5 @@ vendor
 .env
 .vscode
 /tmp
+docs
+CLAUDE.md
