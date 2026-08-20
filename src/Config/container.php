@@ -5,7 +5,9 @@ declare(strict_types=1);
 use Keel\Config\Settings;
 use Keel\Factory\LoggerFactory;
 use Keel\Middleware\ErrorHandler;
+use Keel\Repository\Contract\PermissionRepositoryInterface;
 use Keel\Repository\Contract\UserRepositoryInterface;
+use Keel\Repository\PermissionRepository;
 use Keel\Repository\UserRepository;
 use Keel\Service\JwtService;
 use Psr\Container\ContainerInterface;
@@ -54,4 +56,5 @@ return [
     },
 
     UserRepositoryInterface::class => \DI\autowire(UserRepository::class),
+    PermissionRepositoryInterface::class => \DI\autowire(PermissionRepository::class),
 ];

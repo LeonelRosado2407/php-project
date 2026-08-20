@@ -14,6 +14,7 @@ class DatabaseSeeder
     {
         $seeders = [
             UserSeeder::class,
+            RolePermissionSeeder::class,
             // PostSeeder::class,  ← aquí agregas más, en el orden que necesites
         ];
 
