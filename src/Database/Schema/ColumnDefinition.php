@@ -9,6 +9,7 @@ class ColumnDefinition
     private bool $nullable = false;
     private bool $hasDefault = false;
     private mixed $default = null;
+    private bool $isChange = false;
 
     public function __construct(
         private string $name,
@@ -26,6 +27,22 @@ class ColumnDefinition
         $this->hasDefault = true;
         $this->default = $value;
         return $this;
+    }
+
+    /**
+     * Marca esta columna para usarse como MODIFY COLUMN en vez de ADD COLUMN
+     * dentro de SchemaBuilder::table() (modo alter). Se re-declara la columna
+     * con el mismo método usado en create(), ej. $table->string('email', 191)->change();
+     */
+    public function change(): self
+    {
+        $this->isChange = true;
+        return $this;
+    }
+
+    public function isChange(): bool
+    {
+        return $this->isChange;
     }
 
     public function toSql(): string

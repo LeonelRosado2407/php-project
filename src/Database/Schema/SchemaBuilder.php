@@ -28,4 +28,9 @@ class SchemaBuilder
     {
         $this->pdo->exec("DROP TABLE IF EXISTS {$table}");
     }
+
+    public function rename(string $from, string $to): void
+    {
+        $this->pdo->exec("ALTER TABLE {$from} RENAME TO {$to};");
+    }
 }

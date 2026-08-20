@@ -13,6 +13,9 @@ class Blueprint
     /** @var ForeignKeyDefinition[] */
     private array $foreignKeys = [];
     private array $dropColumns = [];
+    private array $renameColumns = [];
+    private array $dropIndexes = [];
+    private array $dropForeignKeys = [];
     private string $engine = 'InnoDB';
     private string $charset = 'utf8mb4';
     private string $collation = 'utf8mb4_unicode_ci';
@@ -179,6 +182,37 @@ class Blueprint
         return $this;
     }
 
+    /**
+     * Renombra una columna existente. Solo tiene sentido dentro de
+     * SchemaBuilder::table() (modo alter) — en create() no aplica.
+     * Usa sintaxis RENAME COLUMN de MySQL 8+.
+     */
+    public function renameColumn(string $from, string $to): self
+    {
+        $this->renameColumns[] = "RENAME COLUMN {$from} TO {$to}";
+        return $this;
+    }
+
+    /**
+     * Elimina un índice existente por nombre. Solo tiene sentido dentro de
+     * SchemaBuilder::table() (modo alter) — en create() no aplica.
+     */
+    public function dropIndex(string $name): self
+    {
+        $this->dropIndexes[] = "DROP INDEX {$name}";
+        return $this;
+    }
+
+    /**
+     * Elimina una foreign key existente por nombre. Solo tiene sentido dentro de
+     * SchemaBuilder::table() (modo alter) — en create() no aplica.
+     */
+    public function dropForeign(string $name): self
+    {
+        $this->dropForeignKeys[] = "DROP FOREIGN KEY {$name}";
+        return $this;
+    }
+
     public function toSql(): string
     {
         return $this->isAlter ? $this->toAlterSql() : $this->toCreateSql();
@@ -202,15 +236,29 @@ class Blueprint
         $clauses = [];
 
         foreach ($this->columns as $column) {
-            $clauses[] = "ADD COLUMN {$column->toSql()}";
+            $clauses[] = $column->isChange()
+                ? "MODIFY COLUMN {$column->toSql()}"
+                : "ADD COLUMN {$column->toSql()}";
+        }
+
+        foreach ($this->renameColumns as $renameColumn) {
+            $clauses[] = $renameColumn;
         }
 
         foreach ($this->indexes as $index) {
             $clauses[] = "ADD {$index}";
         }
 
+        foreach ($this->dropIndexes as $dropIndex) {
+            $clauses[] = $dropIndex;
+        }
+
         foreach ($this->foreignKeys as $fk) {
             $clauses[] = "ADD {$fk->toSql()}";
+        }
+
+        foreach ($this->dropForeignKeys as $dropForeign) {
+            $clauses[] = $dropForeign;
         }
 
         foreach ($this->dropColumns as $name) {
