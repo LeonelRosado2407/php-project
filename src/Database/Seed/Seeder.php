@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Database\Seed;
+namespace Keel\Database\Seed;
 
 use Faker\Factory;
 use Faker\Generator;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Database\Seed;
+namespace Keel\Database\Seed;
 
 use PDO;
 
@@ -14,6 +14,7 @@ class DatabaseSeeder
     {
         $seeders = [
             UserSeeder::class,
+            RolePermissionSeeder::class,
             // PostSeeder::class,  ← aquí agregas más, en el orden que necesites
         ];
 

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
-use App\Database\Seed\DatabaseSeeder;
-use App\Database\Seed\UserSeeder;
+use Keel\Database\Seed\DatabaseSeeder;
+use Keel\Database\Seed\UserSeeder;
 use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -22,7 +22,7 @@ $class = $argv[1] ?? null;
 
 if ($class) {
     // correr un seeder específico, ej: php bin/seed.php UserSeeder
-    $fqcn = "App\\Database\\Seed\\{$class}";
+    $fqcn = "Keel\\Database\\Seed\\{$class}";
 
     if (!class_exists($fqcn)) {
         echo "No existe el seeder: {$class}\n";

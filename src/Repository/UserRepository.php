@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace Keel\Repository;
 
-use App\Repository\Contract\UserRepositoryInterface;
-use App\Model\User;
+use Keel\Repository\Contract\UserRepositoryInterface;
+use Keel\Model\User;
 use PDO;
 
 class UserRepository implements UserRepositoryInterface

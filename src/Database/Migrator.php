@@ -3,10 +3,10 @@
 
 declare(strict_types=1);
 
-namespace App\Database;
+namespace Keel\Database;
 
 use PDO;
-use App\Database\Schema\SchemaBuilder;
+use Keel\Database\Schema\SchemaBuilder;
 
 class Migrator
 {

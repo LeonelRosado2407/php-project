@@ -4,14 +4,15 @@
 declare(strict_types=1);
 
 use Slim\App;
-use App\Middleware\ErrorHandler;
+use Keel\Config\Settings;
+use Keel\Middleware\ErrorHandler;
 
 return function (App $app) {
     $app->addRoutingMiddleware();
     $app->addBodyParsingMiddleware();
 
     $container = $app->getContainer();
-    $displayErrorDetails = $_ENV['APP_ENV'] === 'development';
+    $displayErrorDetails = $container->get(Settings::class)->get('app.debug');
 
     $errorMiddleware = $app->addErrorMiddleware(
         $displayErrorDetails,

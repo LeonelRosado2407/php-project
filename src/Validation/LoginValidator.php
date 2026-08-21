@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Validation;
+namespace Keel\Validation;
 
-use App\DTO\LoginRequestDTO;
-use App\Exception\ValidationException;
+use Keel\DTO\LoginRequestDTO;
+use Keel\Exception\ValidationException;
 
 class LoginValidator
 {

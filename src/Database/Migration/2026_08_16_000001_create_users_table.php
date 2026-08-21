@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Database\Schema\Blueprint;
-use App\Database\Schema\SchemaBuilder;
+use Keel\Database\Schema\Blueprint;
+use Keel\Database\Schema\SchemaBuilder;
 
 return new class
 {

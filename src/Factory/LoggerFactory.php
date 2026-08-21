@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Factory;
+namespace Keel\Factory;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
